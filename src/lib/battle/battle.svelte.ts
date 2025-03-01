@@ -25,7 +25,7 @@ export class Fighter {
 	attack: number = $state()
 	defense: number = $state()
 	speed: number = $state()
-	constructor({id, name, type, hp, attack, defense, speed}) {
+	constructor({ id, name, type, hp, attack, defense, speed }) {
 		this.id = id
 		this.name = name
 		this.type = type

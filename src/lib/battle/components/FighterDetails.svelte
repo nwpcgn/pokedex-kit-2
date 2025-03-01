@@ -68,7 +68,8 @@
 				><use xlink:href="#pkmn-pokeball"></use></svg>
 			<span class="sr-only">player select</span>
 		</button>
-		<button disabled={disableEnemy}
+		<button
+			disabled={disableEnemy}
 			class="btn btn-sm btn-info btn-outline btn-circle"
 			onclick={onEnemySelect}>
 			<svg class="pkmn-icon pkmn-blank"

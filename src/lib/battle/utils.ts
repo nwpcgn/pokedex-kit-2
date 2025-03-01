@@ -59,4 +59,3 @@ export const sleep = (milliseconds = 1000) =>
 	new Promise((resolve) => setTimeout(resolve, milliseconds))
 
 export const gArr = (int = 1) => Array.from({ length: int }, (_, i) => i + 1)
-

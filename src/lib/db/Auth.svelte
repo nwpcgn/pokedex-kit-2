@@ -1,42 +1,50 @@
 <script lang="ts">
-	import Anmeldung from './Anmeldung.svelte'
-
-	import supabase from './supabase'
-	import _user from './_user'
-	import SignIn from './auth/SignIn.svelte'
+	import Profill from './Profill.svelte'
+	import SignInform from './SignInform.svelte'
+	import supabase from './supabase.js'
+	import getUser from './getUser'
+	import { auth } from '../game.svelte.ts'
 	let { children } = $props()
+
 	supabase.auth.onAuthStateChange((event, session) => {
-		if (event == 'SIGNED_IN') {
-			_user.set(session.user)
+		if (event === 'SIGNED_IN') {
+			auth.initUser(session.user)
 		} else {
-			_user.set(null)
+			auth.initUser(null)
 		}
 	})
 
-	const init = async () => {
-		try {
-			const {
-				data: { user }
-			} = await supabase.auth.getUser()
-			if (user) {
-				_user.set(user)
-			}
-		} catch (error) {
-			console.log({ error })
-		}
+	const initUser = async () => {
+		const user = await getUser()
+		auth.initUser(user)
 	}
+
+	let promise = initUser()
 </script>
 
-{#await init()}
-	<section class="layer nwp center">
-		<article class="p-4">
-			<span class="loading loading-spinner loading-lg"></span>
-		</article>
+<div class="navbar bg-neutral text-neutral-content shadow-sm">
+	<div class="flex-1">
+		<a href="#/" class="btn btn-neutral text-xl">nwp-cgn</a>
+	</div>
+	<div class="flex-none">
+		<a href="#/game" class="btn btn-circle btn-neutral">
+			<span class="sr-only">Game</span>
+			<svg class="pkmn-icon pkmn-pokeball"
+				><use xlink:href="#pkmn-pokeball"></use></svg>
+		</a>
+	</div>
+</div>
+
+{#await promise}
+	<div>...loading</div>
+{:then value}
+	<section class="bg-base-100 grid h-1/2 place-content-center">
+		{#if auth.user}
+			<Profill></Profill>
+		{:else}
+			<article class="content-sm">
+				<SignInform></SignInform>
+			</article>
+		{/if}
 	</section>
-{:then _}
-	{#if $_user}
-		{@render children()}
-	{:else}
-		<SignIn></SignIn>
-	{/if}
 {/await}

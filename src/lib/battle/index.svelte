@@ -122,7 +122,7 @@
 	</section>
 
 	<section class="page-layer center top bg-glass" class:active={detailPage}>
-		<div class="absolute right-4 top-4" onclick={close}>
+		<div class="absolute top-4 right-4" onclick={close}>
 			<button class="btn btn-circle btn-ghost">
 				<svg class="pkmn-icon pkmn-close"
 					><use xlink:href="#pkmn-close"></use></svg>
