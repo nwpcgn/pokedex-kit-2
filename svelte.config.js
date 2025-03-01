@@ -9,7 +9,8 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex()],
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		router: { type: 'hash' }
 	},
 
 	extensions: ['.svelte', '.svx']
