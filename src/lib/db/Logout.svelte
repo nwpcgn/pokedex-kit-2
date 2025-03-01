@@ -23,18 +23,16 @@
 		if (auth.user) {
 			const id = auth.user.id
 			const player = await getProfil(id)
-			console.log({ player })
+			auth.initProfil(player)
 		}
 	})
 </script>
 
-<section class="page-layer bg-base-100 center nwp">
-	<article class="content-sm space-y-4">
-		<hgroup>
-			<h2 class="text-center">Auth</h2>
-		</hgroup>
-		<nav class="flex justify-center gap-2">
-			<button class="btn btn-error" onclick={handleSignOut}>Logout</button>
-		</nav>
-	</article>
-</section>
+<nav class="rounded-box flex items-center justify-between gap-4 p-4 shadow-sm">
+	<div>
+		{#if auth.profil}
+			<span class="text-2xl font-bold">{auth.profil?.username}</span>
+		{/if}
+	</div>
+	<button class="btn btn-error btn-sm" onclick={handleSignOut}>Logout</button>
+</nav>

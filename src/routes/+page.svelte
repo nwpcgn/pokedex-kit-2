@@ -1,4 +1,6 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import Logout from '$lib/db/Logout.svelte'
+</script>
 
 <main class="main">
 	<section class="page-layer nwp">
@@ -11,6 +13,7 @@
 			<p>
 				Visit <a href="#/game">svelte.dev/docs/kit</a> to read the documentation
 			</p>
+			<Logout></Logout>
 		</article>
 	</section>
 </main>

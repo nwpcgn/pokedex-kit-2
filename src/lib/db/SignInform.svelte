@@ -14,31 +14,34 @@
 			console.log({ data })
 		}
 	}
-	
 </script>
 
-<form onsubmit={handleSignIn}>
-	<fieldset
-		class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-		<legend class="fieldset-legend">Sign In</legend>
+<section class="page-layer bg-base-100 center nwp">
+	<article class="content-sm">
+		<form onsubmit={handleSignIn}>
+			<fieldset
+				class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+				<legend class="fieldset-legend">Sign In</legend>
 
-		<label class="fieldset-label">Title</label>
-		<input
-			bind:value={mail}
-			required
-			type="email"
-			class="input"
-			placeholder="Email" />
+				<label class="fieldset-label">Title</label>
+				<input
+					bind:value={mail}
+					required
+					type="email"
+					class="input"
+					placeholder="Email" />
 
-		<label class="fieldset-label">Slug</label>
-		<input
-			bind:value={pw}
-			required
-			type="password"
-			class="input"
-			placeholder="Password" />
+				<label class="fieldset-label">Slug</label>
+				<input
+					bind:value={pw}
+					required
+					type="password"
+					class="input"
+					placeholder="Password" />
 
-		<label class="fieldset-label">Submit</label>
-		<input type="submit" class="btn" value="Login" />
-	</fieldset>
-</form>
+				<label class="fieldset-label">Submit</label>
+				<input type="submit" class="btn" value="Login" />
+			</fieldset>
+		</form>
+	</article>
+</section>
