@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade, fly } from 'svelte/transition'
 	import supabase from './supabase.js'
 	let mail = $state('')
 	let pw = $state('')
@@ -16,7 +17,7 @@
 	}
 </script>
 
-<section class="page-layer bg-base-100 center nwp">
+<section class="main-page" in:fly={{ y: 400 }} out:fade={{ duration: 200 }}>
 	<article class="content-sm">
 		<form onsubmit={handleSignIn}>
 			<fieldset

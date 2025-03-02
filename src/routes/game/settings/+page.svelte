@@ -1,6 +1,5 @@
 <script lang="ts">
-	const title = 'Pkmn Game'
-
+	const title = 'Pkmn Settings'
 </script>
 
 <section class="main-page">

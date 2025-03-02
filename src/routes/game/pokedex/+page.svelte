@@ -1,6 +1,5 @@
 <script lang="ts">
-	const title = 'Pkmn Game'
-
+	const title = 'Pokedex'
 </script>
 
 <section class="main-page">

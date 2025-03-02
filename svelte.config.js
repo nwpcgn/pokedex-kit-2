@@ -9,8 +9,13 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex()],
 
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({
+			fallback: '404.html'
+		}),
 		router: { type: 'hash' }
+	},
+	paths: {
+		base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
 	},
 
 	extensions: ['.svelte', '.svx']

@@ -31,5 +31,7 @@
 {#await promise then _}
 	{#if !auth.user}
 		<SignInform></SignInform>
+	{:else}
+		{@render children()}
 	{/if}
 {/await}
