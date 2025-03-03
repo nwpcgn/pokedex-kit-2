@@ -1,8 +1,9 @@
 <script lang="ts">
+	import PkmnArena from './PkmnArena.svelte'
+
 	import { game, Fighter, getTypeStyle } from '$lib/game.svelte.ts'
 	import PkmnProgress from '$lib/components/PkmnProgress.svelte'
 	import shuffle from '$lib/utils/shuffle.js'
-	let { data } = $props()
 	const steps = [
 		{
 			id: 1,
@@ -33,11 +34,9 @@
 			component: step4
 		}
 	]
-	let moves = $state(game?.moves)
 	let currentStep = $state(0)
 	let player = $state({} | null)
 	let oppo = $state({} | null)
-	let actions = $state([] | null)
 	const createPlayer = ({ id, name, type, base }) => {
 		const obj = {
 			id,
@@ -63,38 +62,7 @@
 		oppo = new Fighter(obj)
 	}
 
-	const callMoves = async () => {
-		actions = [moves.shift(), moves.shift(), moves.shift()]
-	}
-
-	const handleAttack = async (obj) => {
-		if (!obj) {
-			console.error('no obj', e)
-			return
-		}
-		let dice = 1
-		if (obj?.accuracy) dice = obj.accuracy / 100
-		if (dice == 1) dice = 0.9
-		if (Math.random() < dice) {
-			const result = Math.floor(Math.random() * obj?.power)
-			const damage = Math.floor((result / 100) * obj?.power)
-			oppo.hp = Math.max(0, oppo.hp - damage)
-		} else {
-			console.error('Attack fail')
-		}
-
-		console.log({ dice }, obj.accuracy)
-	}
 </script>
-
-<!-- <div class="flex justify-center shadow">
-	<nav role="tablist" class="tabs tabs-border">
-		<a role="tab" data-tab="1" class="tab tab-active">Pokedex</a><a
-			role="tab"
-			data-tab="0"
-			class="tab">Battle</a>
-	</nav>
-</div> -->
 
 <section class="main-page">
 	<article class="content space-y-4">
@@ -224,25 +192,15 @@
 		</div>
 	{/if}
 {/snippet}
-{#snippet step3({ id, name, slug, title })}
-	<div>
-		<div class="grid grid-cols-2 gap-4">
-			<div class="bg-base-100 rounded-box p-4 text-center shadow-sm">
-				{@render cardT(player)}
-			</div>
-			<div class="bg-base-100 rounded-box p-4 text-center shadow-sm">
-				{@render cardT(oppo)}
-			</div>
-		</div>
-	</div>
-	<div class="bg-base-100 rounded-box flex justify-center gap-2 p-4 shadow-sm">
-		<button class="btn" onclick={callMoves}>Attack</button>
-		<span class="flex-1"></span>
-		{#each actions as item}
-			<button class="btn" data-move={item.id} onclick={() => handleAttack(item)}
-				>{item?.category}</button>
-		{/each}
-	</div>
+{#snippet step3(obj)}
+	<PkmnArena
+		{...obj}
+		bind:player
+		bind:oppo
+		onNext={() => {
+			console.log('onNext')
+			currentStep = currentStep + 1
+		}}></PkmnArena>
 {/snippet}
 {#snippet step4({ id, name, slug, title })}
 	<div class="bg-base-100 rounded-box p-4 text-center shadow-sm">
