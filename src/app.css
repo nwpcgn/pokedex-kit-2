@@ -3,12 +3,11 @@
 
 @plugin "daisyui";
 
-
 @plugin "daisyui/theme" {
-	name: "corporate";
+	name: 'corporate';
 	default: true;
 	prefersdark: false;
-	color-scheme: "light";
+	color-scheme: 'light';
 	--color-base-100: oklch(100% 0 0);
 	--color-base-200: oklch(93% 0 0);
 	--color-base-300: oklch(86% 0 0);
@@ -38,7 +37,6 @@
 	--depth: 0;
 	--noise: 0;
 }
-
 
 hgroup {
 	@apply text-slate-800 dark:text-slate-100;

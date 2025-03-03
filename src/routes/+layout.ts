@@ -1,4 +1,10 @@
-export const load: LayoutLoad = async () => {
+import { game } from '$lib/game.svelte.ts'
+export const load: LayoutLoad = async ({ fetch }) => {
+	const res = await fetch('/data/pokeDb.json')
+	const { pokedex, items, moves } = await res.json()
+	if (pokedex) game.initData(pokedex)
+	if (items) game.initItems(items)
+	if (moves) game.initMoves(moves)
 	return {
 		nav: [
 			{
@@ -21,6 +27,8 @@ export const load: LayoutLoad = async () => {
 				href: '/game/settings',
 				icon: 'pkmn-options'
 			}
-		]
+		],
+		pokedex,
+		moves
 	}
 }
